@@ -1,6 +1,8 @@
 import axios from "axios";
 import cookies from "js-cookie";
 
+axios.defaults.withCredentials = true;
+
 type SignupAgreements = {
   privacy: boolean;
   ad:
@@ -10,6 +12,11 @@ type SignupAgreements = {
         app: boolean;
       }
     | false;
+};
+
+type EmailPw = {
+  email: string;
+  password: string;
 };
 
 class AuthService {
@@ -44,7 +51,13 @@ class AuthService {
   ) {
     const { data } = await axios.post(
       process.env.NEXT_PUBLIC_API_HOST + "/auth/signup",
-      { email, password, name, phoneNumber, agreements }
+      {
+        email,
+        password,
+        name,
+        phoneNumber,
+        agreements,
+      }
     );
 
     cookies.set("accessToken", data.access, { expires: 1 });
@@ -52,10 +65,10 @@ class AuthService {
   }
 
   /** 이미 생성된 계정의 토큰을 발급받습니다. */
-  async login(email: string, password: string) {
+  async login(emailPw: EmailPw) {
     const { data } = await axios.post(
       process.env.NEXT_PUBLIC_API_HOST + "/auth/login",
-      { email, password }
+      emailPw
     );
 
     cookies.set("accessToken", data.access, { expires: 1 });
