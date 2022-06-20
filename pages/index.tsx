@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import axios from "axios";
 
 import { AuthService, UserService } from "../src/services";
 
@@ -10,19 +8,21 @@ import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
 
 const Home: NextPage = () => {
-  // const { data } = useQuery("userinfo", () =>
-  //   AuthService.signup(
-  //     "sosdfh3d08@nate.com",
-  //     "12345sf67",
-  //     "harfdry",
-  //     "01092929292",
-  //     {
-  //       privacy: true,
-  //       ad: false,
-  //     }
-  //   )
-  // );
-  console.log(process.env.NEXT_PUBLICK_API_HOST, "env");
+  const { data: signup_res } = useQuery("userinfo", () =>
+    AuthService.signup(
+      "heyhsssssss2@gmail.com",
+      "12!!S3fd7",
+      "hasry",
+      "01092929292",
+      {
+        privacy: true,
+        ad: false,
+      }
+    )
+  );
+  console.log(signup_res);
+
+  // console.log(process.env.NEXT_PUBLIC_API_HOST); dotenv 받아야 나옴
 
   // useEffect(() => {
   //   axios

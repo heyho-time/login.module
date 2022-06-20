@@ -62,6 +62,7 @@ class AuthService {
 
     cookies.set("accessToken", data.access, { expires: 1 });
     cookies.set("refreshToken", data.refresh, { expires: 7 });
+    return data.data;
   }
 
   /** 이미 생성된 계정의 토큰을 발급받습니다. */
@@ -73,6 +74,7 @@ class AuthService {
 
     cookies.set("accessToken", data.access, { expires: 1 });
     cookies.set("refreshToken", data.refresh, { expires: 7 });
+    return data;
   }
 }
 

@@ -40,3 +40,66 @@ yarn dev
    잘 대응되지 않는 기능이 있다면, 구조의 문제점을 파악하고 개선해보세요.
 
 좋은 모듈 설계에 대한 참고자료 : https://www.youtube.com/watch?v=aSAGOH2u2rs
+
+## Cors issue
+
+https://evan-moon.github.io/2020/05/21/about-cors/
+
+https://xiubindev.tistory.com/115
+
+---
+
+### 22.6.21
+
+react-query를 이용해 data fetching모듈 사용해봤다.
+
+내일은 type 지정해 리팩토링 예정.
+cors 에러에 대해 알아보자!
+
+```jsx
+// index.tsx
+const { data: signup_res } = useQuery("userinfo", () =>
+  AuthService.signup(
+    "heyhsssssss2@gmail.com",
+    "12!!S3fd7",
+    "hasry",
+    "01092929292",
+    {
+      privacy: true,
+      ad: false,
+    }
+  )
+);
+console.log(signup_res);
+
+
+
+// auth.service.ts
+async signup(
+    email: string,
+    password: string,
+    name: string,
+    phoneNumber: string,
+    agreements: SignupAgreements
+  ) {
+    const { data } = await axios.post(
+      process.env.NEXT_PUBLIC_API_HOST + "/auth/signup",
+      {
+        email,
+        password,
+        name,
+        phoneNumber,
+        agreements,
+      }
+    );
+
+    cookies.set("accessToken", data.access, { expires: 1 });
+    cookies.set("refreshToken", data.refresh, { expires: 7 });
+    return data.data;
+  }
+```
+
+이게 맞는 것 같은데 계속 cors에러에 막힌다.
+postman에서 실행하면 된다.;;
+
+<img width="35%" src="https://user-images.githubusercontent.com/75261551/174643079-62685829-f06b-469e-b522-d40215d51ae5.png" />
