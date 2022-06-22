@@ -1,21 +1,28 @@
-import type { NextPage } from "next";
-import axios from "axios";
-import Image from "next/image";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
-
-import { AuthService, UserService } from "../src/services";
+import axios from "axios";
+import type { NextPage } from "next";
+import Image from "next/image";
 
 import styles from "../styles/Home.module.css";
-import { useEffect } from "react";
-import authService from "../src/services/auth.service";
+import { AuthService, UserService } from "../src/services";
 
 const Home: NextPage = () => {
+  // const { data: login_res } = useQuery(
+  //   "login",
+  //   () => AuthService.login("sg@gmail.com", "12fdsfaW@@"),
+  //   {
+  //     retry: false,
+  //   }
+  // );
+  // console.log(login_res);
+
   // const { data: signup_res } = useQuery(
   //   "userinfo",
   //   () =>
   //     AuthService.signup(
-  //       "wszzsassg@gmail.com",
-  //       "12faW@@",
+  //       "sg@gmail.com",
+  //       "12fdsfaW@@",
   //       "hryasd",
   //       "01092929292",
   //       {
@@ -29,8 +36,6 @@ const Home: NextPage = () => {
   // );
   // console.log(signup_res);
   // authService쪽에서 {data} 의 중괄호를 벗겨주고 result 그대로 가져옴.
-
-  // console.log(process.env.NEXT_PUBLIC_API_HOST); dotenv 받아야 나옴
 
   // useEffect(() => {
   //   axios
@@ -48,22 +53,10 @@ const Home: NextPage = () => {
   //       console.log(response, "<<<<<res");
   //     });
   // }, []);
-  //  그냥 통신하면 된다...
-
-  // console.log(data, "userinfo");
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>Hello World!</h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>src/services</code>,
-          <code className={styles.code}>src/hooks</code>
-        </p>
-      </main>
-
+    <>
+      <h1 className={styles.title}>Hello World!</h1>
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -76,7 +69,7 @@ const Home: NextPage = () => {
           </span>
         </a>
       </footer>
-    </div>
+    </>
   );
 };
 
