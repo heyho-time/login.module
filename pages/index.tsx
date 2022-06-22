@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import axios from "axios";
 import Image from "next/image";
 import { useQuery } from "react-query";
 
@@ -6,30 +7,37 @@ import { AuthService, UserService } from "../src/services";
 
 import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
+import authService from "../src/services/auth.service";
 
 const Home: NextPage = () => {
-  const { data: signup_res } = useQuery("userinfo", () =>
-    AuthService.signup(
-      "heyhsssssss2@gmail.com",
-      "12!!S3fd7",
-      "hasry",
-      "01092929292",
-      {
-        privacy: true,
-        ad: false,
-      }
-    )
-  );
-  console.log(signup_res);
+  // const { data: signup_res } = useQuery(
+  //   "userinfo",
+  //   () =>
+  //     AuthService.signup(
+  //       "wszzsassg@gmail.com",
+  //       "12faW@@",
+  //       "hryasd",
+  //       "01092929292",
+  //       {
+  //         privacy: true,
+  //         ad: false,
+  //       }
+  //     ),
+  //   {
+  //     retry: false,
+  //   }
+  // );
+  // console.log(signup_res);
+  // authService쪽에서 {data} 의 중괄호를 벗겨주고 result 그대로 가져옴.
 
   // console.log(process.env.NEXT_PUBLIC_API_HOST); dotenv 받아야 나옴
 
   // useEffect(() => {
   //   axios
   //     .post("https://coupang.numble.it/api/auth/signup", {
-  //       email: "soh3089fds@naver.com",
-  //       password: "123456",
-  //       name: "harryfds",
+  //       email: "soh3sssss@naver.com",
+  //       password: "123dfs56",
+  //       name: "hars",
   //       phoneNumber: "01092929292",
   //       agreements: {
   //         privacy: true,
@@ -39,7 +47,8 @@ const Home: NextPage = () => {
   //     .then(function (response) {
   //       console.log(response, "<<<<<res");
   //     });
-  // }, []); 그냥 통신하면 된다...
+  // }, []);
+  //  그냥 통신하면 된다...
 
   // console.log(data, "userinfo");
 
