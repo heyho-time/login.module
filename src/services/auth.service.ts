@@ -1,6 +1,6 @@
 import axios from "axios";
 import cookies from "js-cookie";
-import { SignupAgreements, EmailPw } from "../types/type";
+import { SignupAgreements, EmailPw } from "types/type";
 
 const getToken = (data: { access: string; refresh: string }) => {
   cookies.set("accessToken", data.access, { expires: 1 });
@@ -47,6 +47,7 @@ class AuthService {
         agreements,
       }
     );
+
     getToken(result.data);
     return result;
   }

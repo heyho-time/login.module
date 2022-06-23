@@ -4,8 +4,8 @@ import axios from "axios";
 import type { NextPage } from "next";
 import Image from "next/image";
 
-import styles from "../styles/Home.module.css";
-import { AuthService, UserService } from "../src/services";
+import styles from "styles/Home.module.css";
+import { AuthService } from "services";
 
 const Home: NextPage = () => {
   // const { data: login_res } = useQuery(
