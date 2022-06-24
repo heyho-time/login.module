@@ -1,31 +1,23 @@
-import axios from "axios";
-import cookies from "js-cookie";
-import { SignupAgreements, EmailPw } from "types/type";
+import http from "services/http";
+import { SignupAgreements } from "types/type";
 
-const getToken = (data: { access: string; refresh: string }) => {
-  cookies.set("accessToken", data.access, { expires: 1 });
-  cookies.set("refreshToken", data.refresh, { expires: 7 });
-};
-
-class AuthService {
+class AuthService extends http {
+  constructor() {
+    super();
+  }
   /** refreshToken을 이용해 새로운 토큰을 발급받습니다. */
   async refresh() {
-    const refreshToken = cookies.get("refreshToken");
-    if (!refreshToken) {
-      return;
-    }
+    const refreshToken = super.checkRefreshToken();
 
-    const result = await axios.post(
-      process.env.NEXT_PUBLIC_API_HOST + "/auth/refresh",
-      null,
-      {
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      }
-    );
+    const result = await super.axiosModule({
+      method: "get",
+      url: "/auth/refresh",
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
 
-    getToken(result.data);
+    super.getToken(result.data);
     return result;
   }
 
@@ -37,29 +29,34 @@ class AuthService {
     phoneNumber: string,
     agreements: SignupAgreements
   ) {
-    const result = await axios.post(
-      process.env.NEXT_PUBLIC_API_HOST + "/auth/signup",
-      {
+    const result = await super.axiosModule({
+      method: "post",
+      url: "/auth/signup",
+      data: {
         email,
         password,
         name,
         phoneNumber,
         agreements,
-      }
-    );
+      },
+    });
 
-    getToken(result.data);
+    super.getToken(result.data);
     return result;
   }
 
   /** 이미 생성된 계정의 토큰을 발급받습니다. */
   async login(email: string, password: string) {
-    const result = await axios.post(
-      process.env.NEXT_PUBLIC_API_HOST + "/auth/login",
-      { email, password }
-    );
+    const result = await super.axiosModule({
+      method: "post",
+      url: "/auth/login",
+      data: {
+        email,
+        password,
+      },
+    });
 
-    getToken(result.data);
+    super.getToken(result.data);
     return result;
   }
 }

@@ -4,7 +4,7 @@ import axios from "axios";
 import type { NextPage } from "next";
 import Image from "next/image";
 
-import styles from "styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import { AuthService } from "services";
 
 const Home: NextPage = () => {
@@ -21,8 +21,8 @@ const Home: NextPage = () => {
   //   "userinfo",
   //   () =>
   //     AuthService.signup(
-  //       "sg@gmail.com",
-  //       "12fdsfaW@@",
+  //       "sgfdsa@gmail.com",
+  //       "12fdsf@@",
   //       "hryasd",
   //       "01092929292",
   //       {

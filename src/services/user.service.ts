@@ -1,31 +1,33 @@
+import http from "services/http";
 import axios from "axios";
 import cookies from "js-cookie";
 
-class UserService {
+class UserService extends http {
+  constructor() {
+    super();
+  }
+
   async me() {
-    const accessToken = cookies.get("accessToken");
-    if (!accessToken) {
-      return;
-    }
+    const accessToken = super.checkAccessToken();
 
-    const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_API_HOST + "/users/me",
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const result = await super.axiosModule({
+      method: "get",
+      url: "/users/me",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-    return data;
+    return result;
   }
 
   async read(id: number) {
-    const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_API_HOST + "/users/" + id
-    );
+    const result = await super.axiosModule({
+      method: "get",
+      url: "/users/" + id,
+    });
 
-    return data;
+    return result;
   }
 }
 
