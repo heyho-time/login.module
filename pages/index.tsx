@@ -6,24 +6,30 @@ import Image from "next/image";
 
 import styles from "../styles/Home.module.css";
 import { AuthService } from "services";
+import http from "services/http";
 
 const Home: NextPage = () => {
+  const { data: refresh_res } = useQuery(["refresh"], () =>
+    AuthService.refresh()
+  );
+  console.log(refresh_res, "refreshresponse");
+
   // const { data: login_res } = useQuery(
-  //   "login",
-  //   () => AuthService.login("sg@gmail.com", "12fdsfaW@@"),
+  //   ["login"],
+  //   () => AuthService.login("harfdsf6ddd7@naver.com", "123456"),
   //   {
   //     retry: false,
   //   }
   // );
-  // console.log(login_res);
+  // console.log(login_res, "login-res");
 
-  // const { data: signup_res } = useQuery(
-  //   "userinfo",
+  // const { data:signup_res } = useQuery(
+  //   ["userinfo"],
   //   () =>
   //     AuthService.signup(
-  //       "sgfdsa@gmail.com",
-  //       "12fdsf@@",
-  //       "hryasd",
+  //       "harfdsf6ddd7@naver.com",
+  //       "123456",
+  //       "harry",
   //       "01092929292",
   //       {
   //         privacy: true,
@@ -34,15 +40,16 @@ const Home: NextPage = () => {
   //     retry: false,
   //   }
   // );
-  // console.log(signup_res);
+  // console.log(signup_res, "signup_res ");
+
   // authService쪽에서 {data} 의 중괄호를 벗겨주고 result 그대로 가져옴.
 
   // useEffect(() => {
   //   axios
   //     .post("https://coupang.numble.it/api/auth/signup", {
-  //       email: "soh3sssss@naver.com",
-  //       password: "123dfs56",
-  //       name: "hars",
+  //       email: "harry126fdsafdsa7@naver.com",
+  //       password: "123dfsㄴ56",
+  //       name: "harㄹs",
   //       phoneNumber: "01092929292",
   //       agreements: {
   //         privacy: true,

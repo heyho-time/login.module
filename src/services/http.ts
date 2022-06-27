@@ -11,7 +11,7 @@ type AxiosOptions = {
 };
 
 export default class http {
-  getToken(data: { access: string; refresh: string }) {
+  setToken(data: { access: string; refresh: string }) {
     cookies.set("accessToken", data.access, { expires: 1 });
     cookies.set("refreshToken", data.refresh, { expires: 7 });
   }
@@ -33,10 +33,15 @@ export default class http {
   }
 
   async axiosModule(options: AxiosOptions) {
-    const { data } = await axios({
+    const response = await axios({
       baseURL: process.env.NEXT_PUBLIC_API_HOST,
       ...options,
     });
-    return data;
+
+    return response.data;
   }
 }
+
+export const instance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_HOST,
+});
