@@ -9,10 +9,10 @@ import { AuthService } from "services";
 import http from "services/http";
 
 const Home: NextPage = () => {
-  const { data: refresh_res } = useQuery(["refresh"], () =>
-    AuthService.refresh()
-  );
-  console.log(refresh_res, "refreshresponse");
+  // const { data: refresh_res } = useQuery(["refresh"], () =>
+  //   AuthService.refresh()
+  // );
+  // console.log(refresh_res, "refreshresponse");
 
   // const { data: login_res } = useQuery(
   //   ["login"],
